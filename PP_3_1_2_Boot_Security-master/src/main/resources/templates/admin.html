@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://gas-kvas.com/uploads/posts/2023-03/1678092905_gas-kvas-com-p-krasivii-fon-na-risunke-kota-10.png');
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-fluid {
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfe;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #5c0e61;
+        }
+
+        .table-responsive {
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #fdfdfe;
+        }
+
+        .table-responsive thead {
+            background-color: #934455;
+            color: #fff;
+        }
+
+        .table-responsive th, .table-responsive td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn-add {
+            background-color: #ff1493;
+            border: none;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+
+        .btn-add:hover {
+            background-color: #ff69b4;
+        }
+
+        .btn-action {
+            margin-right: 5px;
+        }
+
+        .btn-action:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <button class="btn btn-lg btn-success" onclick="window.location.href='/'">LOGOUT</button>
+    <div class="container">
+        <h1>User Management</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Age</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${allUsers}">
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getFirstName()}"></td>
+                    <td th:text="${user.getLastName()}"></td>
+                    <td th:text="${user.getAge()}"></td>
+                    <td>
+    <span th:each="role, iterStat : ${user.getRoles()}"
+          th:text="${role.getRole()} + ( ${iterStat.last} ? '' : ', ')"/>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-action" th:href="@{/admin/update(id=${user.getId()})}">Update</a>
+                        <a class="btn btn-danger btn-action" th:href="@{/admin/delete(id=${user.getId()})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-lg btn-success btn-add" onclick="window.location.href='admin/new'">Add User</button>
+    </div>
+</div>
+</body>
+</html>
