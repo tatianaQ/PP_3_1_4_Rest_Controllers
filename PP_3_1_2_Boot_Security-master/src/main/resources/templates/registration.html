@@ -11,6 +11,8 @@
             font-family: Arial, sans-serif;
             background-image: url('https://gas-kvas.com/uploads/posts/2023-03/1678092921_gas-kvas-com-p-krasivii-fon-na-risunke-kota-34.jpg');
             background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: #5c0e61;
             margin: 0;
             padding: 0;
@@ -21,10 +23,11 @@
         }
 
         .container-fluid {
-            padding: 5px;
+            padding: 20px;
             background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
         }
 
         h1 {
@@ -36,9 +39,7 @@
         form {
             border-radius: 10px;
             background-color: #ffb6c1; /* Pink */
-            padding: 10px;
-            max-width: 350px;
-            margin: 0 auto;
+            padding: 20px;
         }
 
         label {
@@ -90,35 +91,50 @@
         .btn-back:hover {
             background-color: #dc143c; /* Crimson */
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
 <body>
 <div class="container-fluid">
     <h1>Сохранение пользователя</h1>
-    <form th:method="POST" th:action="@{/admin/new}" th:object="${user}" class="mb-3">
+    <form th:method="POST" th:action="@{/register}" th:object="${user}" class="mb-3">
+        <div class="mb-3">
+            <label for="email" class="form-label">Введите логин/email</label>
+            <input type="text" th:field="*{email}" id="email" placeholder="Логин/email" class="form-control">
+            <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+        </div>
+
         <div class="mb-3">
             <label for="name" class="form-label">Введите имя пользователя</label>
-            <input type="text" th:field="*{firstName}" id="name" placeholder="Имя пользователя"
-                   class="form-control">
+            <input type="text" th:field="*{firstName}" id="name" placeholder="Имя пользователя" class="form-control">
+            <div class="error-message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
         </div>
 
         <div class="mb-3">
             <label for="surname" class="form-label">Введите фамилию</label>
-            <input type="text" th:field="*{lastName}" id="surname" placeholder="Фамилия"
-                   class="form-control">
+            <input type="text" th:field="*{lastName}" id="surname" placeholder="Фамилия" class="form-control">
+            <div class="error-message" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
         </div>
 
         <div class="mb-3">
             <label for="age" class="form-label">Введите возраст</label>
             <input type="text" th:field="*{age}" id="age" placeholder="Возраст" class="form-control">
+            <div class="error-message" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Введите пароль</label>
-            <input type="password" th:field="*{password}" id="password" placeholder="Пароль"
-                   class="form-control">
+            <input type="password" th:field="*{password}" id="password" placeholder="Пароль" class="form-control">
+            <div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
         </div>
+
         <input type="submit" value="СОХРАНИТЬ" id="save" class="btn btn-primary">
         <a href="javascript:history.back()" class="btn-back">Назад</a>
     </form>

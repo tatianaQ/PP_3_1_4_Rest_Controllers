@@ -96,20 +96,29 @@
     <h1>Registration by Administrator</h1>
     <form th:method="POST" th:action="@{/admin/new}" th:object="${new_user}">
         <div class="mb-3">
-            <label for="name">First name:</label>
-            <input type="text" th:field="*{firstName}" id="name" class="form-control">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" id="email" placeholder="Email" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
         </div>
         <div class="mb-3">
-            <label for="surname">Last name:</label>
-            <input type="text" th:field="*{lastName}" id="surname" class="form-control">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
         </div>
         <div class="mb-3">
-            <label for="age">Age:</label>
-            <input type="text" th:field="*{age}" id="age" class="form-control">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
         </div>
         <div class="mb-3">
-            <label for="password">Password:</label>
-            <input type="password" th:field="*{password}" id="password" class="form-control">
+            <label for="age" class="form-label">Age</label>
+            <input type="text" th:field="*{age}" id="age" placeholder="Age" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" th:field="*{password}" id="password" placeholder="Password" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
         </div>
         <input type="submit" value="SAVE" id="save" class="btn btn-primary">
         <a href="javascript:history.back()" class="btn-back">Back</a>

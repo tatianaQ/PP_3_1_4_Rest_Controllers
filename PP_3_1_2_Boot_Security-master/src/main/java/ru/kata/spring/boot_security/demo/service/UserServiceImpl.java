@@ -44,16 +44,20 @@ public class UserServiceImpl implements UserService {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
 
+        // Update user details
+        existingUser.setEmail(user.getEmail());
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setAge(user.getAge());
-        existingUser.setPassword(user.getPassword());
-        existingUser.setRoles(user.getRoles());
 
-        String newPassword = user.getPassword();
-        if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals(existingUser.getPassword())) {
-            existingUser.setPassword(passwordEncoder.encode(newPassword));
+        // Check if new password is not empty and different from the existing one
+        if (!user.getPassword().isEmpty() && !user.getPassword().equals(existingUser.getPassword())) {
+            // Encode the new password before saving
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
+
+        // Update user roles
+        existingUser.setRoles(user.getRoles());
 
         userRepository.save(existingUser);
     }
@@ -76,6 +80,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }

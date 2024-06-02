@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user{id}")
     public String getInfo(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Details user = (Details) authentication.getPrincipal();

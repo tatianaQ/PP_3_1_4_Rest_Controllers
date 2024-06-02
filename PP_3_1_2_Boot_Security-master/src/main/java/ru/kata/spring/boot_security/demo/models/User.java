@@ -29,10 +29,17 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Min(value = 18, message = "Ошибка в возрасте, возраст должен быть > 18")
+    @NotNull(message = "Поле 'age' должно быть заполнено")
+    @Min(value = 18, message = "Возраст должен быть больше или равен 18")
     @Column(name = "age")
     private int age;
 
+    @Email
+    @NotEmpty(message = "Email не заполнен")
+    @Column(name = "email")
+    private String email;
+
+    @NotEmpty(message = "Пароль не заполнен")
     @Column(name = "password")
     private String password;
 
@@ -47,12 +54,13 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, int age, String password) {
+    public User(Long id, String firstName, String lastName, int age, String password, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -103,17 +111,25 @@ public class User {
         this.roles = roles;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+        return age == user.age && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, password, roles);
+        return Objects.hash(id, firstName, lastName, age, password, roles, email);
     }
 
     @Override
@@ -123,8 +139,11 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
     }
 }
+
+

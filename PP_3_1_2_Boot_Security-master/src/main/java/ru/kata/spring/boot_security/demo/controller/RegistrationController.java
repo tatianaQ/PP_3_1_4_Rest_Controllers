@@ -32,7 +32,7 @@ public class RegistrationController {
     public String performRegistration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
         if(bindingResult.hasErrors())
-            return "/register";
+            return "registration";
         userService.create(user);
         return "redirect:/login";
     }

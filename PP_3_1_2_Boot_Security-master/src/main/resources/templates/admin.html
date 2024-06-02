@@ -81,6 +81,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Email</th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Age</th>
@@ -91,6 +92,7 @@
                 <tbody>
                 <tr th:each="user: ${allUsers}">
                     <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
                     <td th:text="${user.getFirstName()}"></td>
                     <td th:text="${user.getLastName()}"></td>
                     <td th:text="${user.getAge()}"></td>

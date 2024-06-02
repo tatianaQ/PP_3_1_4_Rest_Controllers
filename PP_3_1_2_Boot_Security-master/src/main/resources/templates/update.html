@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>Update User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
+            background-image: url('https://gas-kvas.com/uploads/posts/2023-03/1678092921_gas-kvas-com-p-krasivii-fon-na-risunke-kota-34.jpg');
+            background-size: cover;
+            color: #5c0e61;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .container-fluid {
-            padding-top: 50px;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 40px;
-            color: #007bff;
+            margin-bottom: 20px;
+            color: #83174c;
         }
 
         form {
-            padding: 20px;
             border-radius: 10px;
             background-color: #ffb6c1; /* Pink */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            max-width: 350px;
+            margin: 0 auto;
         }
 
         label {
             font-weight: bold;
-            color: #4682b4; /* Blue */
+            color: #1f0651; /* Blue */
         }
 
-        input[type="text"] {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
             width: 100%;
             padding: 10px;
+            margin-top: 5px;
             margin-bottom: 20px;
-            border: 1px solid #4682b4; /* Blue */
+            border: 1px solid #1f918d; /* Blue */
             border-radius: 5px;
         }
 
@@ -64,7 +69,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #4682b4; /* Darker Blue */
+            background-color: #270729; /* Darker Blue */
         }
 
         .btn-back {
@@ -74,7 +79,7 @@
             margin-top: 20px;
             border: none;
             border-radius: 5px;
-            background-color: #ff69b4; /* Deep Pink */
+            background-color: #ba1d6b; /* Deep Pink */
             color: #fff;
             font-size: 16px;
             cursor: pointer;
@@ -87,39 +92,45 @@
         }
     </style>
 </head>
-
 <body>
 <div class="container-fluid">
-    <div class="container">
-        <h1>Save user</h1>
-        <form th:method="PATCH" th:action="@{/admin/update(id=${user.id})}" th:object="${user}">
-            <div>
-                <label for="name">First name:</label>
-                <input type="text" th:field="*{firstName}" id="name"><br>
-
-                <label for="surname">Last name:</label>
-                <input type="text" th:field="*{lastName}" id="surname"><br>
-
-                <label for="age">Age:</label>
-                <input type="text" th:field="*{age}" id="age"><br>
-
-                <label for="password">Password:</label>
-                <input type="text" th:field="*{password}" id="password"><br>
-
-                <label>Roles:</label>
-                <div th:each="role : ${allRoles}">
-                    <label>
-                        <input type="checkbox" th:id="'role-' + ${role.id}" th:name="'roles'" th:value="${role.id}"
-                               th:checked="${user.roles.contains(role)}">
-                        <span th:for="'role-' + ${role.id}" th:text="${role.role}"></span>
-                    </label><br>
-                </div>
-                <input type="submit" value="SAVE" id="save">
-                <a href="javascript:history.back()" class="btn-back">Back</a>
-            </div>
-        </form>
-    </div>
+    <h1>Update User</h1>
+    <form th:method="PATCH" th:action="@{/admin/update(id=${user.id})}" th:object="${user}">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" id="email" placeholder="Email" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+        </div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="text" th:field="*{age}" id="age" placeholder="Age" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" th:field="*{password}" id="password" placeholder="Password" class="form-control">
+            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+        </div>
+        <label>Roles:</label>
+        <div th:each="role : ${allRoles}">
+            <label>
+                <input type="checkbox" th:id="'role-' + ${role.id}" th:name="'roles'" th:value="${role.id}" th:checked="${user.roles.contains(role)}">
+            </label>
+            <label th:for="'role-' + ${role.id}" th:text="${role.role}"></label><br>
+        </div>
+        <input type="submit" value="Update" class="btn btn-primary">
+        <a href="javascript:history.back()" class="btn-back">Back</a>
+    </form>
 </div>
 </body>
-
 </html>

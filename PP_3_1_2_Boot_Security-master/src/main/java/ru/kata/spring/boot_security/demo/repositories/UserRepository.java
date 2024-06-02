@@ -6,5 +6,5 @@ import ru.kata.spring.boot_security.demo.models.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByFirstName(String firstName);
+    Optional<User> findByEmail(String email);
 }
