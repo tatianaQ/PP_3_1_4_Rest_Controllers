@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+
+        .header a {
+            text-decoration: none;
+            color: #f4f4f4;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            height: 100vh; /* Полоса должна быть на всю высоту */
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #007bff;
+            color: white;
+            width: 100%; /* Синяя полоса по всей ширине сайдбара */
+        }
+
+        main {
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            padding: 10px;
+            background-color: #343a40;
+            color: white;
+            height: 7vh;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #f4f4f4;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .main-content {
+            background-color: #f8f9fa;
+        }
+
+    </style>
+    <title></title>
+
+</head>
+<body>
+<!-- Шапка страницы -->
+<div id="wrapper">
+    <div class="header">
+        <!-- Отображение почты пользователя и его ролей -->
+        <span style="font-weight: bold;" th:text="${user.email}"></span>
+        <span style="font-weight: normal;"> with roles: </span>
+        <span th:each="role : ${user.roles}" th:text="${role.role.substring(5)} + ' '"></span>
+        <a style="float: right;" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<!-- Основной контент страницы -->
+<div class="container-fluid main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Сайдбар -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <!-- Ссылка на раздел администратора -->
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="nav-link" href="#" onclick="window.location.href='/admin'">Admin</a>
+                        </li>
+                        <!-- Ссылка на раздел пользователя -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" onclick="window.location.href='/user'">User</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Основной контент -->
+            <div class="col-md-10 mt-3">
+                <div class="px-3">
+                    <h1>User information-page</h1>
+                    <!--Navigation-->
+                    <div class="tab-content bg-white">
+                        <!--User table-->
+                        <div class="container-fluid px-0 bg-light border t">
+                            <h5 class="card-header">About user</h5>
+                        </div>
+                        <div class="px-3 border t">
+                            <table class="table table-striped mt-3">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Итерация по списку  -->
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.firstName}"></td>
+                                <td th:text="${user.lastName}"></td>
+                                <td th:text="${user.age}"></td>
+                                <td th:text="${user.getEmail()}"></td>
+                                <td>
+                                    <span th:each="role : ${user.roles}"
+                                          th:text="${role.getRole().substring(5)} + ' '"></span>
+                                </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS и зависимости -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
