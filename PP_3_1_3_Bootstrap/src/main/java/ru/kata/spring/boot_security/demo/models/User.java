@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,10 +10,12 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,6 +101,9 @@ public class User {
         return password;
     }
 
+    public String getUsername() {
+        return email;
+    }
     public void setPassword(String password) {
         this.password = password;
     }
@@ -127,8 +133,32 @@ public class User {
     }
 
     @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, age, password, roles, email);
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
     }
 
     @Override

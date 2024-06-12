@@ -1,12 +1,18 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="51" name="JavaScript" />
+      </Languages>
+    </inspection_tool>
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="2">
+          <list size="3">
             <item index="0" class="java.lang.String" itemvalue="${user.getRoles()}" />
             <item index="1" class="java.lang.String" itemvalue="sec:authorize" />
+            <item index="2" class="java.lang.String" itemvalue="https:" />
           </list>
         </value>
       </option>
@@ -30,6 +36,78 @@
         </value>
       </option>
       <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+          <option value="spring-boot_security-demo" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="com.jayway.jsonpath:json-path:2.6.0" />
+          <option value="net.minidev:json-smart:2.4.7" />
+          <option value="ch.qos.logback:logback-classic:1.2.9" />
+          <option value="ch.qos.logback:logback-core:1.2.9" />
+          <option value="org.springframework:spring-core:5.3.14" />
+          <option value="org.springframework.boot:spring-boot-autoconfigure:2.6.2" />
+          <option value="org.springframework.security:spring-security-crypto:5.6.1" />
+          <option value="org.springframework.security:spring-security-web:5.6.1" />
+          <option value="org.springframework.boot:spring-boot:2.6.2" />
+          <option value="org.yaml:snakeyaml:1.29" />
+          <option value="org.springframework:spring-beans:5.3.14" />
+          <option value="com.fasterxml.jackson.core:jackson-databind:2.13.1" />
+          <option value="org.springframework:spring-expression:5.3.14" />
+          <option value="org.springframework:spring-context:5.3.14" />
+          <option value="org.apache.tomcat.embed:tomcat-embed-core:9.0.56" />
+          <option value="org.springframework:spring-web:5.3.14" />
+          <option value="org.springframework:spring-webmvc:5.3.14" />
+          <option value="org.springframework.security:spring-security-config:5.6.1" />
+          <option value="org.springframework.security:spring-security-core:5.6.1" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+        </list>
+      </option>
     </inspection_tool>
   </profile>
 </component>

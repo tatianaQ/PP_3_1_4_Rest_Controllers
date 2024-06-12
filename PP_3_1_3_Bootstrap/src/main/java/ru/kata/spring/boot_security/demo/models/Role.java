@@ -53,17 +53,13 @@ public class Role implements GrantedAuthority {
         this.role = role;
     }
 
+    public String getRoleNameWithoutRole() {
+        return role.substring(5);
+    }
+
     @Override
     public String toString() {
-
-        switch (this.role) {
-            case "ROLE_ADMIN":
-                return "ADMIN";
-            case "ROLE_USER":
-                return "USER";
-            default:
-                return "UNKNOWN";
-        }
+        return getRole().replace("ROLE_", "");
     }
 
     @Override

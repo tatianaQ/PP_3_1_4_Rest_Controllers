@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    ru.kata.spring.boot_security.demo.models.Role findByRole(String role);
+    Role findByRole(String role);
 }
