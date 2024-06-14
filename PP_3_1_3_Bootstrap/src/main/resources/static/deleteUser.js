@@ -18,18 +18,18 @@ function deleteUser() {
             });
         }
 
-        fetch("http://localhost:8080/api/admin/" + formDelete.id.value, {
+        fetch("http://localhost:8080/api/admin/users/" + formDelete.id.value, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: formDelete.id.value,
-                firstName: formDelete.firstName.value,
-                lastName: formDelete.lastName.value,
-                age: formDelete.age.value,
+                firstName: formDelete.name.value,
+                lastName: formDelete.surname.value,
                 email: formDelete.email.value,
                 password: formDelete.password.value,
+                age: formDelete.age.value,
                 roles: rolesForDelete
             })
         }).then(() => {

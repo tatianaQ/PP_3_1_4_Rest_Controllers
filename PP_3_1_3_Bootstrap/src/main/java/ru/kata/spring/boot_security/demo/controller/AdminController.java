@@ -1,72 +1,57 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
-import ru.kata.spring.boot_security.demo.validator.UserValidator;
-
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-
     private final UserService userService;
-    private final UserValidator userValidator;
 
-    @Autowired
-    public AdminController(UserService userService, UserValidator userValidator) {
+    public AdminController(UserService userService) {
         this.userService = userService;
-        this.userValidator = userValidator;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> allUsers(Principal principal, Model model) {
-        List<User> allUsers = userService.getAllUsers();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> showAllUsers() {
+        List<User> userList = userService.getAllUsers();
+        return ResponseEntity.ok(userList);
+    }
+    @GetMapping("/current")
+    public ResponseEntity<User> getCurrentUser(Principal principal) {
+        return ResponseEntity.ok(userService.getUserByEmail(principal.getName()));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable long id) {
-        User user = userService.getUser(id).get();
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        User user = userService.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
+
     }
 
-
-    @PostMapping
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody User user, BindingResult bindingResult) {
-        userValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
-        }
-        userService.saveUser(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    @PostMapping("/users")
+    public ResponseEntity<HttpStatus> addNewUser(@RequestBody User user) {
+        userService.addUser(user);
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable ("id") Long id, @RequestBody @Valid User user) {
+        userService.updateUser(id, user);
+        return new ResponseEntity<> (user, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult bindingResult) {
-        userValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
-        }
-        userService.saveUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id) {
-        User user = userService.getUser(id).get();
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable long id){
         userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 }

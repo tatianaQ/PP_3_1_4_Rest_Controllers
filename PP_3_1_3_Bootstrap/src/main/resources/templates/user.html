@@ -1,71 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <title>Users</title>
 </head>
-
-
 <body>
 <!--Navbar-->
 <header>
-    <nav class="navbar navbar-dark bg-dark p-0 shadow ">
-        <div class="nav-item text-white px-3">
-            <span id="currentUsernameNavbar"></span>
+    <nav class="navbar navbar-dark bg-dark p-0 shadow">
+    <div class="container-fluid">
+ <span class="nav-item text-white px-0">
+        <div class="ml-2px">
+                <strong id="emailCurrentUser" th:font="bold"></strong>
+                with roles:
+                <span id="roleCurrentUser"></span>
         </div>
-        <ul class="navbar-nav">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="/logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
+      </span>
+        <a class="float-right btn text-white" th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
 </header>
-
-<div class="container-fluid mt-3 ">
-
-    <!--Sidebar-->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 px-0">
-            <div class="d-flex flex-column flex-shrink-0 p-0 text-white">
-                <ul class="nav nav-pills flex-column">
+        <div class="col-2 bg-white pt-3 min-vh-100 px-0">
+            <div class="container-fluid px-0">
+                <ul class="nav flex-column nav-pills ">
                     <li class="nav-item">
-                        <a href="#userInfo" data-bs-toggle="pill" class="nav-link active no-refresh" role="tab" aria-current="false">
-                            User
-                        </a>
+                        <a class="nav-link active" href="/user">User</a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="col-md-10 bg-light">
-            <div class="tab-content">
-
-                <!--CurrentUser info-->
-                <div class="tab-pane fade show active" id="userInfo" role="tabpanel">
-                    <div class="container-fluid">
-                        <h2>User Information Page</h2>
-                        <div class="card">
-                            <div class="container-fluid px-0 bg-light border">
-                                <h5 class="card-header">
-                                    About user</h5>
+        <div class="col pt-4 h-100 min-vh-100 bg-light">
+            <div class="container-fluid">
+                <h1 class="display-6 px-3 pb-3">User information-page</h1>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="container-fluid px-0 bg-light border">
+                            <div class="tab-content bg-white " id="myTabContent">
+                                <div class="tab-container-fluid bg-light border-bottom pt-2 pb-1 px-0">
+                                    <h4 class="text-start px-4">About user</h4>
+                                </div>
+                                <div class="container-fluid mt-1">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped bg-white">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">First name</th>
+                                        <th scope="col">Last name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="oneUser">
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="container-fluid mt-4">
-                                <div class="table-responsive">
-                                    <table class="table table-striped bg-white">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Age</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="currentUserTable">
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +71,16 @@
         </div>
     </div>
 </div>
-<script src="/js/user.js"></script>
+
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/user.js"></script>
 </body>
 </html>

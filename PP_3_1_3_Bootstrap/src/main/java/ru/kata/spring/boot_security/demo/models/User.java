@@ -28,12 +28,12 @@ public class User implements UserDetails {
     private String firstName;
 
     @NotEmpty(message = "Фамилия не заполнена")
-    @Size(min = 3, max = 15, message = "Слишком короткая или длинная фамилия")
+    @Size(min = 2, max = 15, message = "Слишком короткая или длинная фамилия")
     @Column(name = "last_name")
     private String lastName;
 
     @NotNull(message = "Поле 'age' должно быть заполнено")
-    @Min(value = 18, message = "Возраст должен быть больше или равен 18")
+    @Min(value = 0, message = "Возраст должен быть больше 0")
     @Column(name = "age")
     private int age;
 
@@ -52,19 +52,26 @@ public class User implements UserDetails {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles;
 
     public User() {
     }
 
     public User(Long id, String firstName, String lastName, int age, String email) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
     }
 
+    public User(String firstName, String lastName, int age, String email, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.roles = roles;
+    }
     public Long getId() {
         return id;
     }
